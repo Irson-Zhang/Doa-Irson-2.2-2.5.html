@@ -1,0 +1,293 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Irson's Goal</title>
+    <!-- Loading Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1e3a8a',
+                        accent: '#2563eb',
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-950 text-slate-700 dark:text-slate-300 min-h-screen transition-colors duration-300 py-10 px-4 sm:px-6">
+
+    <header class="max-w-2xl mx-auto flex justify-between items-center mb-8">
+        <div class="flex items-center space-x-2">
+            <span class="text-xl sm:text-2xl font-bold tracking-wider text-blue-900 dark:text-blue-400 uppercase">🎯 Irson's Goal</span>
+        </div>
+        <button id="theme-toggle" aria-label="Toggle Dark Mode" class="p-2.5 rounded-full bg-white dark:bg-slate-900 shadow-sm border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+            <!-- Sun Icon for Dark Mode -->
+            <svg id="theme-icon-light" class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+            <!-- Moon Icon for Light Mode -->
+            <svg id="theme-icon-dark" class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+            </svg>
+        </button>
+    </header>
+
+    <main class="max-w-2xl mx-auto space-y-8">
+        
+        <section class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-slate-200/80 dark:border-slate-800">
+            <div class="flex justify-between items-center mb-3">
+                <h2 class="text-lg font-bold text-slate-900 dark:text-white uppercase tracking-wide">Goal Progress</h2>
+                <span id="progress-text" class="text-sm font-semibold text-blue-600 dark:text-blue-400">0% Completed</span>
+            </div>
+            <div class="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden">
+                <div id="progress-bar" class="bg-blue-600 h-full rounded-full transition-all duration-500 w-0"></div>
+            </div>
+        </section>
+
+        <section aria-label="Personal Goals" class="space-y-4">
+            <h1 class="text-2xl sm:text-3xl font-extrabold text-center uppercase text-blue-900 dark:text-blue-400 tracking-wider mb-6">Irson's Goal</h1>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-1" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">All ears hear well, are fully healed, and are able to perceive sound with crystal clarity.</span>
+                </label>
+            </div>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-2" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">The entire body is complete, whole, perfectly functioning, and completely healthy.</span>
+                </label>
+            </div>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-3" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">Single, with no girlfriend, living together with Dad, Mom, and Kelly, with no need to think about dating or relationships anymore.</span>
+                </label>
+            </div>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-4" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">God has blessed us to live in the best possible country for us: the United States.</span>
+                </label>
+            </div>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-5" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">Successfully finished learning web development.</span>
+                </label>
+            </div>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-6" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">I want to work remotely for a U.S. company.</span>
+                </label>
+            </div>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-7" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">Provide medical treatment for Grandma (Nainai) in the United States, so that she stays healthy and lives a long, vibrant life.</span>
+                </label>
+            </div>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-8" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">Own a Tesla to take road trips around New York, Long Island, Upstate, and out of state; traveling freely across the United States with no need for international travel anymore.</span>
+                </label>
+            </div>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-9" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">Own a home at 83-45 Vietor Avenue, Elmhurst, Queens, New York; living permanently in the United States, the greatest country, with no need to move or look anywhere else.</span>
+                </label>
+            </div>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-10" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">We live and travel throughout the United States and visit family in Indonesia; just these two home countries, with no need to go anywhere else abroad.</span>
+                </label>
+            </div>
+
+            <div class="goal-card bg-white dark:bg-slate-900 rounded-xl p-5 sm:p-6 shadow-sm border border-slate-200/80 dark:border-slate-800 border-l-4 border-l-blue-600 transition hover:shadow-md">
+                <label class="flex items-start gap-4 cursor-pointer">
+                    <input type="checkbox" data-id="goal-11" class="mt-1 w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text text-slate-700 dark:text-slate-300">I want to travel in the United States, Europe, and Indonesia, except for Russia, Belarus, and Ukraine.</span>
+                </label>
+            </div>
+        </section>
+
+        <section class="bg-blue-50 dark:bg-slate-900 border border-blue-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-blue-900 dark:text-blue-400 font-bold text-lg mb-4">Achieved by focusing on:</h2>
+            <ol class="space-y-3">
+                <li class="flex items-center gap-3">
+                    <input type="checkbox" data-id="focus-1" class="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text font-semibold text-slate-900 dark:text-slate-200">Learning web development</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <input type="checkbox" data-id="focus-2" class="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text font-semibold text-slate-900 dark:text-slate-200">Learning English</span>
+                </li>
+                <li class="flex items-center gap-3">
+                    <input type="checkbox" data-id="focus-3" class="w-5 h-5 text-blue-600 rounded border-slate-300 focus:ring-blue-500 dark:border-slate-700 dark:bg-slate-800">
+                    <span class="goal-text font-semibold text-slate-900 dark:text-slate-200">Learning Mandarin Chinese</span>
+                </li>
+            </ol>
+        </section>
+
+        <section class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 shadow-sm">
+            <h2 class="text-blue-900 dark:text-blue-400 font-bold text-lg mb-4">Country Rankings for Irson's Goal:</h2>
+            <ol class="grid grid-cols-1 sm:grid-cols-2 gap-2 pl-5 list-decimal text-slate-700 dark:text-slate-300 font-medium">
+                <li class="py-1">🇺🇸 United States</li>
+                <li class="py-1">🇮🇸 Iceland</li>
+                <li class="py-1">🇳🇴 Norway</li>
+                <li class="py-1">🇮🇪 Ireland</li>
+                <li class="py-1">🇩🇰 Denmark</li>
+                <li class="py-1">🇨🇭 Switzerland</li>
+                <li class="py-1">🇫🇮 Finland</li>
+                <li class="py-1">🇸🇪 Sweden</li>
+                <li class="py-1">🇩🇪 Germany</li>
+                <li class="py-1">🇳🇱 Netherlands</li>
+                <li class="py-1">🇦🇹 Austria</li>
+                <li class="py-1">🇧🇪 Belgium</li>
+                <li class="py-1">🇱🇺 Luxembourg</li>
+                <li class="py-1">🇬🇧 United Kingdom</li>
+                <li class="py-1">🇸🇮 Slovenia</li>
+                <li class="py-1">🇨🇿 Czech Republic</li>
+                <li class="py-1">🇫🇷 France</li>
+                <li class="py-1">🇪🇸 Spain</li>
+                <li class="py-1">🇨🇾 Cyprus</li>
+                <li class="py-1">🇵🇹 Portugal</li>
+                <li class="py-1">🇪🇪 Estonia</li>
+                <li class="py-1">🇲🇨 Monaco</li>
+                <li class="py-1">🇱🇮 Liechtenstein</li>
+                <li class="py-1">🇲🇹 Malta</li>
+                <li class="py-1">🇮🇹 Italy</li>
+                <li class="py-1">🇵🇱 Poland</li>
+                <li class="py-1">🇸🇲 San Marino</li>
+                <li class="py-1">🇦🇩 Andorra</li>
+                <li class="py-1">🇬🇷 Greece</li>
+                <li class="py-1">🇱🇹 Lithuania</li>
+                <li class="py-1">🇭🇷 Croatia</li>
+                <li class="py-1">🇸🇰 Slovakia</li>
+                <li class="py-1">🇱🇻 Latvia</li>
+                <li class="py-1">🇮🇩 Indonesia</li>
+                <li class="py-1">🇷🇴 Romania</li>
+                <li class="py-1">🇭🇺 Hungary</li>
+                <li class="py-1">🇹🇷 Turkey</li>
+                <li class="py-1">🇰🇿 Kazakhstan</li>
+                <li class="py-1">🇲🇪 Montenegro</li>
+                <li class="py-1">🇧🇬 Bulgaria</li>
+                <li class="py-1">🇷🇸 Serbia</li>
+                <li class="py-1">🇬🇪 Georgia</li>
+                <li class="py-1">🇦🇱 Albania</li>
+                <li class="py-1">🇲🇰 North Macedonia</li>
+                <li class="py-1">🇦🇲 Armenia</li>
+                <li class="py-1">🇦🇿 Azerbaijan</li>
+                <li class="py-1">🇽🇰 Kosovo</li>
+                <li class="py-1">🇧🇦 Bosnia and Herzegovina</li>
+                <li class="py-1">🇲🇩 Moldova</li>
+                <li class="py-1">🇻🇦 Vatican City</li>
+            </ol>
+        </section>
+
+        <footer class="text-center italic text-slate-500 dark:text-slate-400 space-y-2 pt-4 pb-8 border-t border-slate-200 dark:border-slate-800">
+            <p>I want this to become real in the future in Irson's Goal.</p>
+            <p>All of this is completely true in Irson's Goal.</p>
+            <p>Dad, Mom, Kelly, and I all remember this very well in Irson's Goal.</p>
+            <p>I want these dreams to be achieved in Irson's Goal.</p>
+        </footer>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Theme Toggle Logic
+            const themeToggleBtn = document.getElementById('theme-toggle');
+            const htmlElement = document.documentElement;
+
+            const savedTheme = localStorage.getItem('irson_theme');
+            if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                htmlElement.classList.add('dark');
+            } else {
+                htmlElement.classList.remove('dark');
+            }
+
+            themeToggleBtn.addEventListener('click', () => {
+                if (htmlElement.classList.contains('dark')) {
+                    htmlElement.classList.remove('dark');
+                    localStorage.setItem('irson_theme', 'light');
+                } else {
+                    htmlElement.classList.add('dark');
+                    localStorage.setItem('irson_theme', 'dark');
+                }
+            });
+
+            // Checkbox State Management & Progress Tracking
+            const checkboxes = document.querySelectorAll('input[type="checkbox"][data-id]');
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+
+            checkboxes.forEach(checkbox => {
+                const id = checkbox.getAttribute('data-id');
+                const savedState = localStorage.getItem(`irson_${id}`);
+                if (savedState === 'true') {
+                    checkbox.checked = true;
+                    updateGoalStyle(checkbox, true);
+                }
+
+                checkbox.addEventListener('change', (e) => {
+                    const isChecked = e.target.checked;
+                    localStorage.setItem(`irson_${id}`, isChecked);
+                    updateGoalStyle(e.target, isChecked);
+                    updateProgress();
+                });
+            });
+
+            function updateGoalStyle(checkbox, isChecked) {
+                const textSpan = checkbox.parentElement.querySelector('.goal-text');
+                if (textSpan) {
+                    if (isChecked) {
+                        textSpan.classList.add('line-through', 'opacity-60');
+                    } else {
+                        textSpan.classList.remove('line-through', 'opacity-60');
+                    }
+                }
+            }
+
+            function updateProgress() {
+                const total = checkboxes.length;
+                let checkedCount = 0;
+                checkboxes.forEach(cb => {
+                    if (cb.checked) checkedCount++;
+                });
+
+                const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+                progressBar.style.width = `${percentage}%`;
+                progressText.textContent = `${percentage}% Completed (${checkedCount}/${total})`;
+            }
+
+            updateProgress();
+        });
+    </script>
+</body>
+</html>
