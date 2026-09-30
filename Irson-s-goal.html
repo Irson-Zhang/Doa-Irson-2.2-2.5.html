@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Irson's Goal</title>
+    <!-- Tailwind CSS for modern responsive styling -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      :root {
+        --primary-color: #1e3a8a;
+        --accent-color: #2563eb;
+        --bg-color: #f8fafc;
+        --card-bg: #ffffff;
+        --text-color: #334155;
+        --heading-color: #0f172a;
+      }
+
+      .dark {
+        --primary-color: #60a5fa;
+        --accent-color: #3b82f6;
+        --bg-color: #0f172a;
+        --card-bg: #1e293b;
+        --text-color: #cbd5e1;
+        --heading-color: #f8fafc;
+      }
+
+      body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+
+      .goal-card, .focus-card {
+        background: var(--card-bg);
+        color: var(--text-color);
+        transition: background-color 0.3s ease, transform 0.2s ease, border-color 0.3s ease;
+      }
+
+      .goal-card:hover {
+        transform: translateY(-2px);
+      }
+
+      input[type="checkbox"] {
+        accent-color: var(--accent-color);
+      }
+
+      .completed-text {
+        text-decoration: line-through;
+        opacity: 0.6;
+      }
+    </style>
+  </head>
+  <body class="py-10 px-4">
+    <main class="max-w-2xl mx-auto">
+      
+      <!-- Top Control Bar (Theme Toggle & Progress) -->
+      <div class="flex flex-col sm:flex-row items-center justify-between mb-8 gap-4 bg-[var(--card-bg)] p-4 rounded-xl shadow-sm border border-slate-200 dark:border-slate-800">
+        <!-- Progress Bar -->
+        <div class="w-full sm:w-2/3">
+          <div class="flex justify-between text-xs font-semibold mb-1 uppercase tracking-wider text-[var(--primary-color)]">
+            <span>Goal Progress</span>
+            <span id="progress-text">0%</span>
+          </div>
+          <div class="w-full bg-slate-200 dark:bg-slate-700 h-2.5 rounded-full overflow-hidden">
+            <div id="progress-bar" class="bg-[var(--accent-color)] h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Dark Mode Toggle Button -->
+        <button id="theme-toggle" class="flex items-center gap-2 px-4 py-2 text-sm font-semibold rounded-lg bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 transition cursor-pointer">
+          <span id="theme-icon">🌙</span> <span id="theme-text">Dark Mode</span>
+        </button>
+      </div>
+
+      <!-- Main Heading -->
+      <h1 class="text-center font-extrabold uppercase tracking-widest text-[var(--primary-color)] mb-6 text-3xl">
+        Irson's Goal
+      </h1>
+
+      <!-- Personal Goals Section -->
+      <section aria-label="Personal Goals" class="space-y-4 mb-8" id="goals-section">
+        <!-- Goal Cards will be dynamically structured via JS for checkboxes -->
+      </section>
+
+      <!-- Focus Section -->
+      <section class="focus-card p-6 rounded-xl border border-blue-200 dark:border-blue-900/50 shadow-sm mb-8 bg-blue-50/50 dark:bg-slate-800/60">
+        <h2 class="text-[var(--primary-color)] font-bold text-lg mb-3">Achieved by focusing on:</h2>
+        <ol class="list-decimal pl-5 space-y-2 font-semibold text-[var(--heading-color)]" id="focus-list">
+          <!-- Focus list items -->
+        </ol>
+      </section>
+
+      <!-- Country Rankings Section -->
+      <section class="focus-card p-6 rounded-xl border border-blue-200 dark:border-blue-900/50 shadow-sm mb-8 bg-blue-50/50 dark:bg-slate-800/60">
+        <h2 class="text-[var(--primary-color)] font-bold text-lg mb-3">Country Rankings for Irson's Goal:</h2>
+        <ol class="list-decimal pl-5 space-y-1.5 text-sm font-medium text-[var(--text-color)]" id="rankings-list">
+          <!-- Country items -->
+        </ol>
+      </section>
+
+      <!-- Footer -->
+      <footer class="text-center mt-8 italic text-slate-500 dark:text-slate-400 space-y-2 text-sm">
+        <p>I want this to become real in the future in Irson's Goal.</p>
+        <p>All of this is completely true in Irson's Goal.</p>
+        <p>Dad, Mom, Kelly, and I all remember this very well in Irson's Goal.</p>
+        <p>I want these dreams to be achieved in Irson's Goal.</p>
+      </footer>
+    </main>
+
+    <script>
+      // Raw data for goals
+      const goalsData = [
+        "All ears hear well, are fully healed, and are able to perceive sound with crystal clarity.",
+        "The entire body is complete, whole, perfectly functioning, and completely healthy.",
+        "Single, with no girlfriend, living together with Dad, Mom, and Kelly, with no need to think about dating or relationships anymore.",
+        "God has blessed us to live in the best possible country for us: the United States.",
+        "Successfully finished learning web development.",
+        "I want to work remotely for a U.S. company.",
+        "Provide medical treatment for Grandma (Nainai) in the United States, so that she stays healthy and lives a long, vibrant life.",
+        "Own a Tesla to take road trips around New York, Long Island, Upstate, and out of state; traveling freely across the United States with no need for international travel anymore.",
+        "Own a home at 83-45 Vietor Avenue, Elmhurst, Queens, New York; living permanently in the United States, the greatest country, with no need to move or look anywhere else.",
+        "We live and travel throughout the United States and visit family in Indonesia; just these two home countries, with no need to go anywhere else abroad.",
+        "I want to travel in the United States, Europe, and Indonesia, except for Russia, Belarus, and Ukraine."
+      ];
+
+      const focusData = [
+        "Learning web development",
+        "Learning English",
+        "Learning Mandarin Chinese"
+      ];
+
+      const countriesData = [
+        "🇺🇸 United States", "🇮🇸 Iceland", "🇳🇴 Norway", "🇮🇪 Ireland", "🇩🇰 Denmark", 
+        "🇨🇭 Switzerland", "🇫🇮 Finland", "🇸🇪 Sweden", "🇩🇪 Germany", "🇳🇱 Netherlands", 
+        "🇦🇹 Austria", "🇧🇪 Belgium", "🇱🇺 Luxembourg", "🇬🇧 United Kingdom", "🇸🇮 Slovenia", 
+        "🇨🇿 Czech Republic", "🇫🇷 France", "🇪🇸 Spain", "🇨🇾 Cyprus", "🇵🇹 Portugal", 
+        "🇪🇪 Estonia", "🇲🇨 Monaco", "🇱🇮 Liechtenstein", "🇲🇹 Malta", "🇮🇹 Italy", 
+        "🇵🇱 Poland", "🇸🇲 San Marino", "🇦🇩 Andorra", "🇬🇷 Greece", "🇱🇹 Lithuania", 
+        "🇭🇷 Croatia", "🇸🇰 Slovakia", "🇱🇻 Latvia", "🇮🇩 Indonesia", "🇷🇴 Romania", 
+        "🇭🇺 Hungary", "🇹🇷 Turkey", "🇰🇿 Kazakhstan", "🇲🇪 Montenegro", "🇧🇬 Bulgaria", 
+        "🇷🇸 Serbia", "🇬🇪 Georgia", "🇦🇱 Albania", "🇲🇰 North Macedonia", "🇦🇲 Armenia", 
+        "🇦🇿 Azerbaijan", "🇽🇰 Kosovo", "🇧🇦 Bosnia and Herzegovina", "🇲🇩 Moldova", "🇻🇦 Vatican City"
+      ];
+
+      // Local storage persistence helper
+      const getSavedState = () => {
+        try {
+          return JSON.parse(localStorage.getItem('irsons_goals_state')) || {};
+        } catch {
+          return {};
+        }
+      };
+
+      const saveState = (state) => {
+        try {
+          localStorage.setItem('irsons_goals_state', JSON.stringify(state));
+        } catch (e) {
+          console.error(e);
+        }
+      };
+
+      // Populate Personal Goals
+      const goalsSection = document.getElementById('goals-section');
+      goalsData.forEach((goal, index) => {
+        const cardId = `goal_${index}`;
+        const card = document.createElement('div');
+        card.className = "goal-card rounded-xl p-6 shadow-sm border-l-5 border-[var(--accent-color)] flex items-start gap-3 cursor-pointer";
+        
+        const checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.id = cardId;
+        checkbox.className = "mt-1.5 w-5 h-5 rounded cursor-pointer shrink-0";
+
+        const textSpan = document.createElement('span');
+        textSpan.className = "flex-1 text-sm md:text-base";
+        textSpan.textContent = goal;
+
+        card.appendChild(checkbox);
+        card.appendChild(textSpan);
+        goalsSection.appendChild(card);
+
+        // Click card toggles checkbox
+        card.addEventListener('click', (e) => {
+          if (e.target !== checkbox) {
+            checkbox.checked = !checkbox.checked;
+            checkbox.dispatchEvent(new Event('change'));
+          }
+        });
+
+        checkbox.addEventListener('change', () => {
+          const state = getSavedState();
+          state[cardId] = checkbox.checked;
+          saveState(state);
+          updateProgress();
+          if (checkbox.checked) {
+            textSpan.classList.add('completed-text');
+          } else {
+            textSpan.classList.remove('completed-text');
+          }
+        });
+      });
+
+      // Populate Focus List
+      const focusList = document.getElementById('focus-list');
+      focusData.forEach((item, index) => {
+        const focusId = `focus_${index}`;
+        const li = document.createElement('li');
+        li.className = "flex items-center gap-3 cursor-pointer py-1";
+
+        const checkbox = document.createElement('input');
+        checkbox.type = "checkbox";
+        checkbox.id = focusId;
+        checkbox.className = "w-4 h-4 rounded cursor-pointer shrink-0";
+
+        const textSpan = document.createElement('span');
+        textSpan.textContent = item;
+
+        li.appendChild(checkbox);
+        li.appendChild(textSpan);
+        focusList.appendChild(li);
+
+        li.addEventListener('click', (e) => {
+          if (e.target !== checkbox) {
+            checkbox.checked = !checkbox.checked;
+            checkbox.dispatchEvent(new Event('change'));
+          }
+        });
+
+        checkbox.addEventListener('change', () => {
+          const state = getSavedState();
+          state[focusId] = checkbox.checked;
+          saveState(state);
+          updateProgress();
+          if (checkbox.checked) {
+            textSpan.classList.add('completed-text');
+          } else {
+            textSpan.classList.remove('completed-text');
+          }
+        });
+      });
+
+      // Populate Country Rankings
+      const rankingsList = document.getElementById('rankings-list');
+      countriesData.forEach((country) => {
+        const li = document.createElement('li');
+        li.textContent = country;
+        rankingsList.appendChild(li);
+      });
+
+      // Update Progress Bar
+      function updateProgress() {
+        const allCheckboxes = document.querySelectorAll('input[type="checkbox"]');
+        const total = allCheckboxes.length;
+        let checkedCount = 0;
+        allCheckboxes.forEach(cb => {
+          if (cb.checked) checkedCount++;
+        });
+
+        const percentage = total > 0 ? Math.round((checkedCount / total) * 100) : 0;
+        document.getElementById('progress-bar').style.width = `${percentage}%`;
+        document.getElementById('progress-text').textContent = `${percentage}% Completed`;
+      }
+
+      // Load Saved State on Startup
+      window.addEventListener('DOMContentLoaded', () => {
+        const state = getSavedState();
+        Object.keys(state).forEach(id => {
+          const cb = document.getElementById(id);
+          if (cb) {
+            cb.checked = state[id];
+            if (cb.checked) {
+              const textSpan = cb.parentElement.querySelector('span');
+              if (textSpan) textSpan.classList.add('completed-text');
+            }
+          }
+        });
+        updateProgress();
+
+        // Theme initialization
+        const savedTheme = localStorage.getItem('irsons_theme') || 'light';
+        if (savedTheme === 'dark') {
+          document.documentElement.classList.add('dark');
+          document.getElementById('theme-icon').textContent = '☀️';
+          document.getElementById('theme-text').textContent = 'Light Mode';
+        }
+      });
+
+      // Theme Toggle Logic
+      const themeToggleBtn = document.getElementById('theme-toggle');
+      themeToggleBtn.addEventListener('click', () => {
+        const isDark = document.documentElement.classList.toggle('dark');
+        localStorage.setItem('irsons_theme', isDark ? 'dark' : 'light');
+        document.getElementById('theme-icon').textContent = isDark ? '☀️' : '🌙';
+        document.getElementById('theme-text').textContent = isDark ? 'Light Mode' : 'Dark Mode';
+      });
+    </script>
+  </body>
+</html>
